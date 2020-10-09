@@ -3,7 +3,7 @@ const {secretKey} = require("../config")
 
 const verifyToken = async (req, res, next) => {
     try {
-        const {token} = req.headers
+        const token = req.headers.authorization
         const decoded = await jwt.verify(token, secretKey)
         res.locals.tokenInfo = decoded
         next()
