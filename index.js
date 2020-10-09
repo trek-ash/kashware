@@ -14,6 +14,6 @@ app.use(bodyParser.json())
 app.use("/login", require("./routes/login"))
 app.use("/jsonPatch", verifyToken, require("./routes/jsonPatch"))
 app.use("/thumbnail", verifyToken, require("./routes/thumbnail"))
-app.listen(port, ()=>{
+module.exports = app.listen(port, ()=>{
     console.log("Server started...")
 })
