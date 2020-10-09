@@ -4,16 +4,16 @@ const request = supertest(app);
 const {TEST_THUMBNAIL_URL, TEST_JSON, TEST_JSONPATCH} = require("./constants")
 let token = null;
 
-describe('Login API Routes', function() {
-    describe('POST /login', function() {
-        it('Login with username and password', function(done) {
+describe('Login API Routes', () => {
+    describe('POST /login', () => {
+        it('Login with username and password', (done) => {
             request.post('/login')
                 .send({
                     username: 'test',
                     password: 'test_password'
                 })
                 .expect(200)
-                .end(function(err, res) {
+                .end((err, res) => {
                     token = res.body.token
                     done(err);
                 });
@@ -21,9 +21,9 @@ describe('Login API Routes', function() {
     });
 });
 
-describe('JSON Patch API Routes', function() {
-    describe('PATCH /jsonPatch', function() {
-        it('Patch the json with json_patch object', function(done) {
+describe('JSON Patch API Routes', () => {
+    describe('PATCH /jsonPatch', () => {
+        it('Patch the json with json_patch object', (done) => {
             request.patch('/jsonPatch')
                 .set("Authorization", token)
                 .send({
@@ -31,7 +31,7 @@ describe('JSON Patch API Routes', function() {
                     json_patch: TEST_JSONPATCH
                 })
                 .expect(200)
-                .end(function(err, res) {
+                .end((err, res) => {
                     done(err);
                 });
         });
@@ -39,16 +39,16 @@ describe('JSON Patch API Routes', function() {
 });
 
 
-describe('Thumbnail API Routes', function() {
-    describe('POST /thumbnail', function() {
-        it('Download image from url, create thumbnail and return', function(done) {
+describe('Thumbnail API Routes', () => {
+    describe('POST /thumbnail', () =>  {
+        it('Download image from url, create thumbnail and return', (done) => {
             request.post('/thumbnail')
                 .set("Authorization", token)
                 .send({
                     url: TEST_THUMBNAIL_URL
                 })
                 .expect(200)
-                .end(function(err, res) {
+                .end((err, res) => {
                     done(err);
                 });
         });
