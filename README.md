@@ -22,3 +22,14 @@ npm start
 ```
 The server will run on localhost:8000 by default
 
+Run tests<br />
+
+```js
+npm test
+```
+### Docker
+
+Pull from public Docker hub repository: <br/>
+```js
+docker pull yash2103/kashware-assignment:latest
+```
