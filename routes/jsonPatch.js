@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const jsonpatch = require('jsonpatch')
-router.post("/", async (req, res)=>{
+router.patch("/", async (req, res)=>{
     try{
         const {json, json_patch} = req.body;
         
