@@ -2,6 +2,7 @@ const router = require('express').Router();
 const jwt = require("jsonwebtoken")
 
 const {secretKey} = require("../config")
+const logger = require('../utils/logger');
 
 router.post("/", async (req, res)=>{
     try{
@@ -16,7 +17,9 @@ router.post("/", async (req, res)=>{
         const token = jwt.sign({
             data: username
           }, secretKey, { expiresIn: '1h' });
-          
+
+        logger.info("Token generated");
+
         return res.status(200)
             .json({
                 token

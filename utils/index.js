@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 const sharp = require('sharp');
+const logger = require('../utils/logger');
 
 const ORIGINAL_BASE_DIR = "uploads/originals/"
 const THUMBNAIL_BASE_DIR = "uploads/thumbnails/"
@@ -10,7 +11,9 @@ downloadImageFromUrl = (url, fileName) => {
     return new Promise((res, rej)=>{
       try {
         let file = fs.createWriteStream(originalDest);
+        logger.info("Fetching image from url");
         http.get(url, (response) => {
+          logger.info("Fetch complete! Saving file");
           response.pipe(file);
           file.on('finish', () => {
             file.close(res);  
@@ -20,6 +23,7 @@ downloadImageFromUrl = (url, fileName) => {
           rej();
         });
       } catch (error) {
+        logger.error("Failed file fetch from url")
         rej(error)
       }
     })
@@ -49,6 +53,7 @@ createThumbnail = async (url) => {
 }
 
 convertFileToThumbnail = (sourceFilePath, destinationFilePath)=>{
+    logger.info("Resizing using sharp")
     return sharp(sourceFilePath).resize({ height:50, width:50}).toFile(destinationFilePath)
 }
 
